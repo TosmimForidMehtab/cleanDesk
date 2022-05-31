@@ -4,8 +4,7 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 # ------------------------------------------------------------------------------------------
-folderToTrack = "C:\\Users\\Tosmim\\Desktop\\Project"
-# folderToTrack = str(input("Enter a folder path: "))
+folderToTrack = "C:\\Users\\Susan\\Desktop"
 folderDestination = folderToTrack + "\\"+"cleanFolder"
 
 if not os.path.isdir(folderDestination):
@@ -168,6 +167,7 @@ extensionFolders = {
     "msi": Exexutables,
     "bat": Exexutables,
     "cmd": Exexutables,
+    "lnk": Exexutables,
     "other": Others
 }
 # ----------------------------------------------------------------------------------------------------------
