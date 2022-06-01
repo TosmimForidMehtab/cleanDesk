@@ -22,9 +22,9 @@ Documents = folderDestination+"\\"+"Documents"
 if not os.path.isdir(Documents):
     os.mkdir(Documents)
 
-Exexutables = folderDestination+"\\"+"Exexutables"
-if not os.path.isdir(Exexutables):
-    os.mkdir(Exexutables)
+Executables = folderDestination+"\\"+"Executables"
+if not os.path.isdir(Executables):
+    os.mkdir(Executables)
 
 Others = folderDestination+"\\"+"Others"
 if not os.path.isdir(Others):
@@ -124,7 +124,7 @@ class MyHandler(FileSystemEventHandler):
                     newName = extensionFolders[extension] + "\\"+newName
                     os.rename(src, newName)
                 except Exception:
-                    print(f"Error in {filename}")
+                    continue
     def on_created(self, event):
         self.on_modified(event)
 
@@ -165,11 +165,11 @@ extensionFolders = {
     "ppt": Documents,
     "docx": Documents,
     "xlsx": Documents,
-    "exe": Exexutables,
-    "msi": Exexutables,
-    "bat": Exexutables,
-    "cmd": Exexutables,
-    "lnk": Exexutables,
+    "exe": Executables,
+    "msi": Executables,
+    "bat": Executables,
+    "cmd": Executables,
+    "lnk": Executables,
     "other": Others
 }
 # ----------------------------------------------------------------------------------------------------------
