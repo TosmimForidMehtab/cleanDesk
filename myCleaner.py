@@ -1,11 +1,32 @@
-import os
-import time
-from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-
+from watchdog.observers import Observer
+import time
+import os
+import getpass
 # ------------------------------------------------------------------------------------------
-folderToTrack = "C:\\Users\\Susan\\Desktop"
+user = getpass.getuser()
+folderToTrack = "C:\\Users\\" + user + "\\Desktop"
+fileLoc = "C:\\Users\\" + user + "\\Documents\\locText.txt"
+
+if os.path.isfile(fileLoc):
+    yn = input("Do you want to use previoiusly defined folder location: ")
+    if(yn == "y"):
+        with open(fileLoc, 'r') as f:
+            folderToTrack = f.read()
+    else:
+        folderToTrack = str(input("Enter a folder path: "))
+        with open(fileLoc, 'w') as f:
+            f.write(folderToTrack)
+
+else:
+    folderToTrack = str(input("Enter a folder path: "))
+    with open(fileLoc, 'w') as f:
+        f.write(folderToTrack)
+
+folderToTrack = folderToTrack.replace("\\", "\\\\")
 folderDestination = folderToTrack + "\\"+"cleanFolder"
+
+# ----------------------------------------------------------------------------------------------------------
 
 if not os.path.isdir(folderDestination):
     os.mkdir(folderDestination)
@@ -22,9 +43,9 @@ Documents = folderDestination+"\\"+"Documents"
 if not os.path.isdir(Documents):
     os.mkdir(Documents)
 
-Executables = folderDestination+"\\"+"Executables"
-if not os.path.isdir(Executables):
-    os.mkdir(Executables)
+Exexutables = folderDestination+"\\"+"Exexutables"
+if not os.path.isdir(Exexutables):
+    os.mkdir(Exexutables)
 
 Others = folderDestination+"\\"+"Others"
 if not os.path.isdir(Others):
@@ -100,8 +121,8 @@ if not os.path.isdir(Css):
 class MyHandler(FileSystemEventHandler):
     def on_modified(self, event):
         for filename in os.listdir(folderToTrack):
-            i = 1
             if filename != "cleanFolder":
+                i = 1
                 try:
                     splitName = filename.split('.')
                     extension = str(splitName[1])
@@ -111,7 +132,7 @@ class MyHandler(FileSystemEventHandler):
                     fileExists = os.path.isfile(
                         extensionFolders[extension] + "\\" + newName)
 
-                    while fileExists:
+                    while fileExists:  # Bug 1
                         i += 1
                         newName = os.path.splitext(
                             folderToTrack+"\\"+newName)[0] + str(i) + os.path.splitext(folderToTrack+"\\"+newName)[1]
@@ -125,9 +146,11 @@ class MyHandler(FileSystemEventHandler):
                     os.rename(src, newName)
                 except Exception:
                     continue
-    def on_created(self, event):
-        self.on_modified(event)
+                    # print(f"Error in {filename}")
 
+    def on_created(self, event):
+        time.sleep(6)
+        self.on_modified(event)
 # --------------------------------------------------------------------------------------------------
 
 
@@ -165,11 +188,11 @@ extensionFolders = {
     "ppt": Documents,
     "docx": Documents,
     "xlsx": Documents,
-    "exe": Executables,
-    "msi": Executables,
-    "bat": Executables,
-    "cmd": Executables,
-    "lnk": Executables,
+    "exe": Exexutables,
+    "msi": Exexutables,
+    "bat": Exexutables,
+    "cmd": Exexutables,
+    "lnk": Exexutables,
     "other": Others
 }
 # ----------------------------------------------------------------------------------------------------------
