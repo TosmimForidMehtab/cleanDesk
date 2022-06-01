@@ -125,6 +125,8 @@ class MyHandler(FileSystemEventHandler):
                     os.rename(src, newName)
                 except Exception:
                     print(f"Error in {filename}")
+    def on_created(self, event):
+        self.on_modified(event)
 
 # --------------------------------------------------------------------------------------------------
 
