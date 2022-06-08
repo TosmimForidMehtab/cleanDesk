@@ -1,6 +1,6 @@
 **Open cmd and go to the location where you downloaded the project**
 
-`> cd C:\\Users\\JohnDoe\\Desktop`
+`> cd C:\Users\JohnDoe\Desktop`
 
 **Run**
 
