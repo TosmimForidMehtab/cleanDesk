@@ -1,3 +1,8 @@
+# CleanDesk
+
+![Screenshot (717)](https://user-images.githubusercontent.com/83111399/214790042-3430b134-2a5d-47ec-ab0f-4dcaaafed02b.png)
+![Screenshot (718)](https://user-images.githubusercontent.com/83111399/214790061-cf9ae7a2-2766-4fb1-9fcd-9e881e0b4074.png)
+
 **Open cmd and go to the location where you downloaded the project**
 
 `> cd C:\Users\JohnDoe\Desktop`
